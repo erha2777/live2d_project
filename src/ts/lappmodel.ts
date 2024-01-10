@@ -461,11 +461,21 @@ export class LAppModel extends CubismUserModel {
     //--------------------------------------------------------------------------
     this._model.loadParameters(); // 加载上次保存的状态
     if (this._motionManager.isFinished()) {
-      // 没有动作再生时，从待机动作中随机再生
-      this.startRandomMotion(
-        LAppDefine.MotionGroupIdle,
-        LAppDefine.PriorityIdle
-      );
+      if (this._firstMotion) {
+        console.debug('firstMotion');
+        this.startRandomMotion(
+          'login',
+          1
+        );
+        this._firstMotion = false;
+      } else {
+        // 没有动作再生时，从待机动作中随机再生
+        this.startRandomMotion(
+          LAppDefine.MotionGroupIdle,
+          LAppDefine.PriorityIdle
+        );
+      }
+
     } else {
       motionUpdated = this._motionManager.updateMotion(
         this._model,
@@ -897,6 +907,7 @@ export class LAppModel extends CubismUserModel {
     this._consistency = false;
   }
 
+  _firstMotion = true;
   _modelSetting: ICubismModelSetting; // 模型设置信息
   _modelHomeDir: string; // 模型设置所在的目录
   _userTimeSeconds: number; // 增量时间累计值[秒]

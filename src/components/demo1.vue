@@ -14,7 +14,11 @@ onMounted(() => {
 
 const changeModel = () => {
   console.debug(live2d.App.live2DManager);
-  live2d.App.live2DManager.nextScene()
+  live2d.nextModel()
+}
+
+const changeMotion =()=>{
+  live2d.changeMotion()
 }
 </script>
 
@@ -32,7 +36,8 @@ const changeModel = () => {
     </div>
   </div>
   <div class="btns">
-  <button  @click="changeModel">切换模型</button>
+    <button @click="changeModel">切换模型</button>
+    <button @click="changeMotion">切换动作</button>
   </div>
 </template>
 
@@ -43,8 +48,12 @@ const changeModel = () => {
   left: 0;
   border: 1px solid #Fff;
 }
+
 .btns {
   position: fixed;
   right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 </style>

@@ -63,5 +63,27 @@ export class Live2d {
         };
     }
 
+    /**
+       * 切换下一个模型。
+       *
+       * @return 
+       */
+    public nextModel(): void {
+        this?.App?.live2DManager?.nextScene()
+    }
 
+    /**
+       * 切换动作。
+       *
+       * @return 
+       */
+    public changeMotion(): void {
+        console.debug(this?.App?.live2DManager?._models);
+        console.debug(this?.App?.live2DManager?._models?._ptr[0]);
+        console.debug(this?.App?.live2DManager?._models?._ptr[0]._motions._keyValues);
+        console.debug(this?.App?.live2DManager?._models?._ptr[0].startMotion);
+        let motions = this?.App?.live2DManager?._models?._ptr[0]._motions._keyValues
+        let motion = motions[0]
+        this?.App?.live2DManager?._models?._ptr[0].startMotion('login',0)
+    }
 }
